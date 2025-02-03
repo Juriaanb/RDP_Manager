@@ -1,20 +1,20 @@
 @echo off
-REM run.bat - Start de RDP Dashboard Flask-app
+REM run.bat - Start the RDP Dashboard Flask app
 
-REM Controleer of Python aanwezig is
+REM Check if Python is available
 python --version
 if errorlevel 1 (
-    echo "Python is niet gevonden. Installeer eerst Python 3."
+    echo "Python not found. Please install Python 3 first."
     pause
     exit /b 1
 )
 
-REM Eventueel requirements installeren (optioneel, kun je ook weglaten)
+REM Install requirements (optional, can be removed)
 echo Installing Python dependencies...
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 
-REM Start de Flask-app
+REM Start the Flask app
 echo Starting RDP Dashboard...
 python app.py
 
