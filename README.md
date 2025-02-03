@@ -11,9 +11,6 @@
 ```
 
 A simple and efficient remote desktop management system
-
-[Features](#features) • [Quick Start](#quick-start) • [Dashboard](#dashboard-interface) • [Documentation](#documentation)
-
 </div>
 
 ## ⚡ Quick Start
