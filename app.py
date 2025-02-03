@@ -9,7 +9,7 @@ from flask import Flask, render_template, request, jsonify, send_from_directory
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-# Importeer de blueprints voor RDP en PDF functies
+# Import blueprints for RDP and PDF functionality
 from rdp import rdp_blueprint
 from pdf import pdf_blueprint
 
@@ -36,7 +36,7 @@ def load_config():
             last_modified = current_mtime
             print("Config reloaded successfully")
     except Exception as e:
-        print(f"Fout bij laden config: {e}")
+        print(f"Error loading config: {e}")
         config_data = {"hypervisors": []}
 
 def save_config():
@@ -45,7 +45,7 @@ def save_config():
             json.dump(config_data, f, indent=2)
         return True
     except Exception as e:
-        print(f"Fout bij opslaan config: {e}")
+        print(f"Error saving config: {e}")
         return False
 
 @app.route("/")
@@ -65,17 +65,17 @@ def api_status():
 def api_ping():
     ip = request.args.get("ip", "")
     if not ip:
-        return jsonify({"error": "Geen IP"}), 400
+        return jsonify({"error": "IP address required"}), 400
     online = is_online(ip)
     return jsonify({"status": "online" if online else "offline"})
 
-# API endpoints voor systeembeheer
+# API endpoints for system management
 @app.route("/api/add_system", methods=["POST"])
 def add_system():
     try:
         data = request.json
         if not data:
-            return jsonify({"error": "Geen data ontvangen"}), 400
+            return jsonify({"error": "No data received"}), 400
 
         if "id" not in data:
             data["id"] = f"{data['type']}_{int(time.time())}"
@@ -104,7 +104,7 @@ def add_system():
         if save_config():
             return jsonify({"success": True})
         else:
-            return jsonify({"error": "Fout bij opslaan"}), 500
+            return jsonify({"error": "Error saving configuration"}), 500
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -112,17 +112,20 @@ def add_system():
 @app.route("/api/delete_system/<system_id>", methods=["DELETE"])
 def delete_system(system_id):
     try:
+        # Remove hypervisor if it matches system_id
         config_data["hypervisors"] = [
             hv for hv in config_data.get("hypervisors", [])
             if hv["id"] != system_id
         ]
+        # Remove VM if it matches system_id
         for hv in config_data.get("hypervisors", []):
             if "vms" in hv:
                 hv["vms"] = [vm for vm in hv["vms"] if vm["id"] != system_id]
+        
         if save_config():
             return jsonify({"success": True})
         else:
-            return jsonify({"error": "Fout bij opslaan"}), 500
+            return jsonify({"error": "Error saving configuration"}), 500
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -132,8 +135,9 @@ def edit_system(system_id):
     try:
         data = request.json
         if not data:
-            return jsonify({"error": "Geen data ontvangen"}), 400
+            return jsonify({"error": "No data received"}), 400
 
+        # Try updating hypervisor
         for hv in config_data.get("hypervisors", []):
             if hv["id"] == system_id:
                 hv.update({
@@ -143,8 +147,9 @@ def edit_system(system_id):
                 })
                 if save_config():
                     return jsonify({"success": True})
-                return jsonify({"error": "Fout bij opslaan"}), 500
+                return jsonify({"error": "Error saving configuration"}), 500
 
+        # Try updating VM if hypervisor update failed
         for hv in config_data.get("hypervisors", []):
             if "vms" in hv:
                 for vm in hv["vms"]:
@@ -156,9 +161,9 @@ def edit_system(system_id):
                         })
                         if save_config():
                             return jsonify({"success": True})
-                        return jsonify({"error": "Fout bij opslaan"}), 500
+                        return jsonify({"error": "Error saving configuration"}), 500
 
-        return jsonify({"error": "Systeem niet gevonden"}), 404
+        return jsonify({"error": "System not found"}), 404
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -168,6 +173,10 @@ def serve_static_file(filename):
     return send_from_directory("static", filename)
 
 def is_online(ip: str) -> bool:
+    """
+    Check if a system is online by sending a ping request
+    Returns True if system responds, False otherwise
+    """
     param = "-n" if platform.system().lower() == "windows" else "-c"
     cmd = ["ping", param, "1", ip]
     try:
@@ -185,6 +194,7 @@ def is_online(ip: str) -> bool:
         return False
 
 def update_all_pings():
+    """Update ping status for all systems in configuration"""
     global PING_STATUSES
     for hv in config_data.get("hypervisors", []):
         PING_STATUSES[hv["id"]] = is_online(hv["ip"])
@@ -192,18 +202,20 @@ def update_all_pings():
             PING_STATUSES[vm["id"]] = is_online(vm["ip"])
 
 def ping_updater_thread():
+    """Background thread to periodically update ping statuses"""
     while True:
         update_all_pings()
         time.sleep(30)
 
 def setup_file_watcher():
+    """Setup watchdog to monitor config file changes"""
     event_handler = ConfigFileHandler()
     observer = Observer()
     observer.schedule(event_handler, path=".", recursive=False)
     observer.start()
     return observer
 
-# Registreer de RDP- en PDF-blueprints
+# Register the RDP and PDF blueprints
 app.register_blueprint(rdp_blueprint)
 app.register_blueprint(pdf_blueprint)
 
