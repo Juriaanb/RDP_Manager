@@ -1,0 +1,80 @@
+{
+  "hypervisors": [
+    {
+      "id": "DEVHOST01",
+      "name": "DEVHOST01",
+      "ip": "10.0.15.81",
+      "mac": "AA:1B:C2:D3:E4:F5",
+      "vms": []
+    },
+    {
+      "id": "DEVHOST02",
+      "name": "DEVHOST02",
+      "ip": "10.0.15.82",
+      "mac": "BB:2C:D3:E4:F5:A6",
+      "vms": []
+    },
+    {
+      "id": "hyper2",
+      "name": "CloudNode_East1",
+      "ip": "10.0.15.51",
+      "mac": "CC:3D:E4:F5:A6:B7",
+      "vms": []
+    },
+    {
+      "id": "hyper3",
+      "name": "CloudNode_East2",
+      "ip": "10.0.15.52",
+      "mac": "DD:4E:F5:A6:B7:C8",
+      "vms": [
+        {
+          "id": "vm21",
+          "name": "TESTAPPVM01",
+          "ip": "10.0.15.224",
+          "mac": "EE:5F:A6:B7:C8:D9"
+        },
+        {
+          "id": "vm23",
+          "name": "DEVBOXAPP01",
+          "ip": "10.0.15.225",
+          "mac": "FF:6A:B7:C8:D9:E0"
+        }
+      ]
+    },
+    {
+      "id": "hyper4",
+      "name": "CloudNode_East3",
+      "ip": "10.0.15.53",
+      "mac": "11:7B:C8:D9:E0:F1",
+      "vms": []
+    },
+    {
+      "id": "hyper5",
+      "name": "CloudNode_East4",
+      "ip": "10.0.15.54",
+      "mac": "22:8C:D9:E0:F1:A2",
+      "vms": []
+    },
+    {
+      "id": "hyper6",
+      "name": "CloudNode_East5",
+      "ip": "10.0.15.55",
+      "mac": "33:9D:E0:F1:A2:B3",
+      "vms": []
+    },
+    {
+      "id": "hyper7",
+      "name": "CloudNode_East6",
+      "ip": "10.0.15.56",
+      "mac": "44:0E:F1:A2:B3:C4",
+      "vms": []
+    },
+    {
+      "id": "hyper8",
+      "name": "CloudNode_East7",
+      "ip": "10.0.15.57",
+      "mac": "55:1F:A2:B3:C4:D5",
+      "vms": []
+    }
+  ]
+}
