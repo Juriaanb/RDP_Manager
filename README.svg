@@ -1,21 +1,19 @@
 <svg width="1200" height="2000" viewBox="0 0 1200 2000" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Define a header gradient similar to your CSS one -->
+    <!-- Header Gradient -->
     <linearGradient id="headerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#2b3a67"/>
       <stop offset="33%" stop-color="#496a81"/>
       <stop offset="66%" stop-color="#66999b"/>
       <stop offset="100%" stop-color="#b3af8f"/>
     </linearGradient>
-    <!-- Drop shadow filter for a subtle card effect -->
+    <!-- Drop Shadow Filter -->
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.1"/>
     </filter>
   </defs>
 
-  <!-- Container margin: we use an outer padding of 40px -->
-
-  <!-- Header -->
+  <!-- HEADER -->
   <rect x="40" y="40" width="1120" height="150" rx="15" fill="url(#headerGradient)" filter="url(#shadow)"/>
   <text x="600" y="100" text-anchor="middle" font-size="48" fill="white" font-family="sans-serif">
     RDP Dashboard
@@ -24,34 +22,34 @@
     A simple and efficient remote desktop management system
   </text>
 
-  <!-- Quick Start Card -->
+  <!-- QUICK START CARD -->
   <rect x="40" y="210" width="1120" height="200" rx="15" fill="white" filter="url(#shadow)"/>
   <text x="60" y="240" font-size="24" fill="#2b3a67" font-family="sans-serif">
     🚀 Quick Start
   </text>
   <!-- Step 1 -->
   <circle cx="220" cy="280" r="15" fill="#2b3a67"/>
-  <text x="220" y="285" text-anchor="middle" font-size="16" fill="white" font-family="sans-serif">1</text>
+  <text x="220" y="286" text-anchor="middle" font-size="16" fill="white" font-family="sans-serif">1</text>
   <text x="220" y="310" text-anchor="middle" font-size="18" fill="#2b3a67" font-family="sans-serif">Run</text>
   <text x="220" y="330" text-anchor="middle" font-size="14" fill="black" font-family="sans-serif">
     Double click run.bat
   </text>
   <!-- Step 2 -->
   <circle cx="580" cy="280" r="15" fill="#2b3a67"/>
-  <text x="580" y="285" text-anchor="middle" font-size="16" fill="white" font-family="sans-serif">2</text>
+  <text x="580" y="286" text-anchor="middle" font-size="16" fill="white" font-family="sans-serif">2</text>
   <text x="580" y="310" text-anchor="middle" font-size="18" fill="#2b3a67" font-family="sans-serif">Wait</text>
   <text x="580" y="330" text-anchor="middle" font-size="14" fill="black" font-family="sans-serif">
     Python check &amp; installation
   </text>
   <!-- Step 3 -->
   <circle cx="940" cy="280" r="15" fill="#2b3a67"/>
-  <text x="940" y="285" text-anchor="middle" font-size="16" fill="white" font-family="sans-serif">3</text>
+  <text x="940" y="286" text-anchor="middle" font-size="16" fill="white" font-family="sans-serif">3</text>
   <text x="940" y="310" text-anchor="middle" font-size="18" fill="#2b3a67" font-family="sans-serif">Access</text>
   <text x="940" y="330" text-anchor="middle" font-size="14" fill="black" font-family="sans-serif">
     Open localhost:5000
   </text>
 
-  <!-- Features Card -->
+  <!-- FEATURES CARD -->
   <rect x="40" y="430" width="1120" height="250" rx="15" fill="white" filter="url(#shadow)"/>
   <text x="60" y="460" font-size="24" fill="#2b3a67" font-family="sans-serif">
     ✨ Features
@@ -81,61 +79,60 @@
     Built-in documentation viewer
   </text>
 
-  <!-- Interface Card -->
+  <!-- INTERFACE CARD -->
   <rect x="40" y="690" width="1120" height="200" rx="15" fill="white" filter="url(#shadow)"/>
   <text x="60" y="720" font-size="24" fill="#2b3a67" font-family="sans-serif">
     💻 Interface
   </text>
   <!-- Interface Preview Header -->
   <rect x="60" y="740" width="1040" height="30" rx="8" fill="#f8f9fa"/>
-  <text x="70" y="760" font-size="16" fill="black" font-family="sans-serif">
+  <text x="70" y="760" font-size="16" fill="#2b3a67" font-family="sans-serif">
     RDP Dashboard
   </text>
-  <text x="1040" y="760" text-anchor="end" font-size="16" fill="black" font-family="sans-serif">
+  <text x="1100" y="760" text-anchor="end" font-size="16" fill="#2b3a67" font-family="sans-serif">
     Status Machine
   </text>
   <!-- System Items -->
-  <!-- System Item 1 -->
-  <text x="70" y="780" font-size="16" fill="black" font-family="sans-serif">
+  <!-- Item 1 -->
+  <text x="70" y="790" font-size="16" fill="black" font-family="sans-serif">
     ▼ Hypervisor 1
   </text>
-  <!-- Badge Online -->
-  <rect x="300" y="768" width="70" height="20" rx="10" fill="#d4edda"/>
-  <text x="335" y="782" text-anchor="middle" font-size="12" fill="#155724" font-family="sans-serif">
+  <rect x="300" y="780" width="70" height="20" rx="10" fill="#d4edda"/>
+  <text x="335" y="795" text-anchor="middle" font-size="12" fill="#155724" font-family="sans-serif">
     Online
   </text>
-  <!-- System Item 2 -->
-  <text x="90" y="800" font-size="16" fill="black" font-family="sans-serif">
+  <!-- Item 2 -->
+  <text x="90" y="820" font-size="16" fill="black" font-family="sans-serif">
     VM 1 (192.168.1.101)
   </text>
-  <rect x="300" y="788" width="70" height="20" rx="10" fill="#d4edda"/>
-  <text x="335" y="802" text-anchor="middle" font-size="12" fill="#155724" font-family="sans-serif">
+  <rect x="300" y="810" width="70" height="20" rx="10" fill="#d4edda"/>
+  <text x="335" y="825" text-anchor="middle" font-size="12" fill="#155724" font-family="sans-serif">
     Online
   </text>
-  <!-- System Item 3 -->
-  <text x="90" y="820" font-size="16" fill="black" font-family="sans-serif">
+  <!-- Item 3 -->
+  <text x="90" y="850" font-size="16" fill="black" font-family="sans-serif">
     VM 2 (192.168.1.102)
   </text>
-  <rect x="300" y="808" width="70" height="20" rx="10" fill="#f8d7da"/>
-  <text x="335" y="822" text-anchor="middle" font-size="12" fill="#721c24" font-family="sans-serif">
+  <rect x="300" y="840" width="70" height="20" rx="10" fill="#f8d7da"/>
+  <text x="335" y="855" text-anchor="middle" font-size="12" fill="#721c24" font-family="sans-serif">
     Offline
   </text>
 
-  <!-- File Structure Card -->
+  <!-- FILE STRUCTURE CARD -->
   <rect x="40" y="910" width="1120" height="150" rx="15" fill="white" filter="url(#shadow)"/>
   <text x="60" y="940" font-size="24" fill="#2b3a67" font-family="sans-serif">
     📁 File Structure
   </text>
   <text x="60" y="970" font-size="14" fill="black" font-family="monospace">
-    <tspan x="60" dy="1.2em">root/</tspan>
-    <tspan x="60" dy="1.2em">├── run.bat       👈 Start here!</tspan>
-    <tspan x="60" dy="1.2em">├── app.py</tspan>
-    <tspan x="60" dy="1.2em">├── rdp.py</tspan>
-    <tspan x="60" dy="1.2em">├── pdf.py</tspan>
-    <tspan x="60" dy="1.2em">└── requirements.txt</tspan>
+    <tspan x="60" dy="1.5em">root/</tspan>
+    <tspan x="60" dy="1.5em">├── run.bat       👈 Start here!</tspan>
+    <tspan x="60" dy="1.5em">├── app.py</tspan>
+    <tspan x="60" dy="1.5em">├── rdp.py</tspan>
+    <tspan x="60" dy="1.5em">├── pdf.py</tspan>
+    <tspan x="60" dy="1.5em">└── requirements.txt</tspan>
   </text>
 
-  <!-- Troubleshooting Card -->
+  <!-- TROUBLESHOOTING CARD -->
   <rect x="40" y="1070" width="1120" height="250" rx="15" fill="white" filter="url(#shadow)"/>
   <text x="60" y="1100" font-size="24" fill="#2b3a67" font-family="sans-serif">
     🔧 Troubleshooting
