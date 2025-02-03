@@ -1,362 +1,204 @@
-<svg fill="none" viewBox="0 0 1200 2000" width="1200" height="2000" xmlns="http://www.w3.org/2000/svg">
-  <foreignObject width="100%" height="100%">
-    <div xmlns="http://www.w3.org/1999/xhtml">
-      <style>
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
+<svg width="1200" height="2000" viewBox="0 0 1200 2000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Define a header gradient similar to your CSS one -->
+    <linearGradient id="headerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2b3a67"/>
+      <stop offset="33%" stop-color="#496a81"/>
+      <stop offset="66%" stop-color="#66999b"/>
+      <stop offset="100%" stop-color="#b3af8f"/>
+    </linearGradient>
+    <!-- Drop shadow filter for a subtle card effect -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.1"/>
+    </filter>
+  </defs>
 
-        .container {
-          background: #f5f5f5;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-          padding: 40px;
-          max-width: 1200px;
-          margin: 0 auto;
-        }
+  <!-- Container margin: we use an outer padding of 40px -->
 
-        .header {
-          background: linear-gradient(-45deg, #2b3a67, #496a81, #66999b, #b3af8f);
-          background-size: 400% 400%;
-          animation: gradient 15s ease infinite;
-          padding: 60px;
-          color: white;
-          text-align: center;
-          border-radius: 15px;
-          margin-bottom: 40px;
-        }
+  <!-- Header -->
+  <rect x="40" y="40" width="1120" height="150" rx="15" fill="url(#headerGradient)" filter="url(#shadow)"/>
+  <text x="600" y="100" text-anchor="middle" font-size="48" fill="white" font-family="sans-serif">
+    RDP Dashboard
+  </text>
+  <text x="600" y="140" text-anchor="middle" font-size="24" fill="white" font-family="sans-serif">
+    A simple and efficient remote desktop management system
+  </text>
 
-        .header h1 {
-          font-size: 48px;
-          margin-bottom: 20px;
-        }
+  <!-- Quick Start Card -->
+  <rect x="40" y="210" width="1120" height="200" rx="15" fill="white" filter="url(#shadow)"/>
+  <text x="60" y="240" font-size="24" fill="#2b3a67" font-family="sans-serif">
+    🚀 Quick Start
+  </text>
+  <!-- Step 1 -->
+  <circle cx="220" cy="280" r="15" fill="#2b3a67"/>
+  <text x="220" y="285" text-anchor="middle" font-size="16" fill="white" font-family="sans-serif">1</text>
+  <text x="220" y="310" text-anchor="middle" font-size="18" fill="#2b3a67" font-family="sans-serif">Run</text>
+  <text x="220" y="330" text-anchor="middle" font-size="14" fill="black" font-family="sans-serif">
+    Double click run.bat
+  </text>
+  <!-- Step 2 -->
+  <circle cx="580" cy="280" r="15" fill="#2b3a67"/>
+  <text x="580" y="285" text-anchor="middle" font-size="16" fill="white" font-family="sans-serif">2</text>
+  <text x="580" y="310" text-anchor="middle" font-size="18" fill="#2b3a67" font-family="sans-serif">Wait</text>
+  <text x="580" y="330" text-anchor="middle" font-size="14" fill="black" font-family="sans-serif">
+    Python check &amp; installation
+  </text>
+  <!-- Step 3 -->
+  <circle cx="940" cy="280" r="15" fill="#2b3a67"/>
+  <text x="940" y="285" text-anchor="middle" font-size="16" fill="white" font-family="sans-serif">3</text>
+  <text x="940" y="310" text-anchor="middle" font-size="18" fill="#2b3a67" font-family="sans-serif">Access</text>
+  <text x="940" y="330" text-anchor="middle" font-size="14" fill="black" font-family="sans-serif">
+    Open localhost:5000
+  </text>
 
-        .header p {
-          font-size: 24px;
-          opacity: 0.9;
-        }
+  <!-- Features Card -->
+  <rect x="40" y="430" width="1120" height="250" rx="15" fill="white" filter="url(#shadow)"/>
+  <text x="60" y="460" font-size="24" fill="#2b3a67" font-family="sans-serif">
+    ✨ Features
+  </text>
+  <!-- Feature 1: Remote Desktop -->
+  <text x="70" y="500" font-size="24" fill="black" font-family="sans-serif">⚡</text>
+  <text x="100" y="500" font-size="18" fill="#2b3a67" font-family="sans-serif">Remote Desktop</text>
+  <text x="100" y="520" font-size="14" fill="black" font-family="sans-serif">
+    Quick RDP connections to your systems
+  </text>
+  <!-- Feature 2: Real-time Monitor -->
+  <text x="600" y="500" font-size="24" fill="black" font-family="sans-serif">📡</text>
+  <text x="630" y="500" font-size="18" fill="#2b3a67" font-family="sans-serif">Real-time Monitor</text>
+  <text x="630" y="520" font-size="14" fill="black" font-family="sans-serif">
+    Live system status updates
+  </text>
+  <!-- Feature 3: Wake-on-LAN -->
+  <text x="70" y="560" font-size="24" fill="black" font-family="sans-serif">🔌</text>
+  <text x="100" y="560" font-size="18" fill="#2b3a67" font-family="sans-serif">Wake-on-LAN</text>
+  <text x="100" y="580" font-size="14" fill="black" font-family="sans-serif">
+    Remote power management
+  </text>
+  <!-- Feature 4: PDF Viewer -->
+  <text x="600" y="560" font-size="24" fill="black" font-family="sans-serif">📄</text>
+  <text x="630" y="560" font-size="18" fill="#2b3a67" font-family="sans-serif">PDF Viewer</text>
+  <text x="630" y="580" font-size="14" fill="black" font-family="sans-serif">
+    Built-in documentation viewer
+  </text>
 
-        .card {
-          background: white;
-          border-radius: 15px;
-          padding: 30px;
-          margin-bottom: 30px;
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+  <!-- Interface Card -->
+  <rect x="40" y="690" width="1120" height="200" rx="15" fill="white" filter="url(#shadow)"/>
+  <text x="60" y="720" font-size="24" fill="#2b3a67" font-family="sans-serif">
+    💻 Interface
+  </text>
+  <!-- Interface Preview Header -->
+  <rect x="60" y="740" width="1040" height="30" rx="8" fill="#f8f9fa"/>
+  <text x="70" y="760" font-size="16" fill="black" font-family="sans-serif">
+    RDP Dashboard
+  </text>
+  <text x="1040" y="760" text-anchor="end" font-size="16" fill="black" font-family="sans-serif">
+    Status Machine
+  </text>
+  <!-- System Items -->
+  <!-- System Item 1 -->
+  <text x="70" y="780" font-size="16" fill="black" font-family="sans-serif">
+    ▼ Hypervisor 1
+  </text>
+  <!-- Badge Online -->
+  <rect x="300" y="768" width="70" height="20" rx="10" fill="#d4edda"/>
+  <text x="335" y="782" text-anchor="middle" font-size="12" fill="#155724" font-family="sans-serif">
+    Online
+  </text>
+  <!-- System Item 2 -->
+  <text x="90" y="800" font-size="16" fill="black" font-family="sans-serif">
+    VM 1 (192.168.1.101)
+  </text>
+  <rect x="300" y="788" width="70" height="20" rx="10" fill="#d4edda"/>
+  <text x="335" y="802" text-anchor="middle" font-size="12" fill="#155724" font-family="sans-serif">
+    Online
+  </text>
+  <!-- System Item 3 -->
+  <text x="90" y="820" font-size="16" fill="black" font-family="sans-serif">
+    VM 2 (192.168.1.102)
+  </text>
+  <rect x="300" y="808" width="70" height="20" rx="10" fill="#f8d7da"/>
+  <text x="335" y="822" text-anchor="middle" font-size="12" fill="#721c24" font-family="sans-serif">
+    Offline
+  </text>
 
-        .card h2 {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          color: #2b3a67;
-          margin-bottom: 20px;
-          font-size: 24px;
-        }
+  <!-- File Structure Card -->
+  <rect x="40" y="910" width="1120" height="150" rx="15" fill="white" filter="url(#shadow)"/>
+  <text x="60" y="940" font-size="24" fill="#2b3a67" font-family="sans-serif">
+    📁 File Structure
+  </text>
+  <text x="60" y="970" font-size="14" fill="black" font-family="monospace">
+    <tspan x="60" dy="1.2em">root/</tspan>
+    <tspan x="60" dy="1.2em">├── run.bat       👈 Start here!</tspan>
+    <tspan x="60" dy="1.2em">├── app.py</tspan>
+    <tspan x="60" dy="1.2em">├── rdp.py</tspan>
+    <tspan x="60" dy="1.2em">├── pdf.py</tspan>
+    <tspan x="60" dy="1.2em">└── requirements.txt</tspan>
+  </text>
 
-        .steps {
-          display: flex;
-          gap: 20px;
-          margin-top: 20px;
-        }
-
-        .step {
-          flex: 1;
-          background: #f8f9fa;
-          padding: 20px;
-          border-radius: 10px;
-          text-align: center;
-        }
-
-        .step-number {
-          background: #2b3a67;
-          color: white;
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 10px;
-        }
-
-        .features-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
-        }
-
-        .feature {
-          background: #f8f9fa;
-          padding: 20px;
-          border-radius: 10px;
-          display: flex;
-          align-items: flex-start;
-          gap: 15px;
-        }
-
-        .feature-icon {
-          font-size: 24px;
-        }
-
-        .interface-preview {
-          background: #f8f9fa;
-          padding: 20px;
-          border-radius: 10px;
-          margin-top: 20px;
-        }
-
-        .mock-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 15px;
-          background: white;
-          border-radius: 8px;
-          margin-bottom: 15px;
-        }
-
-        .mock-content {
-          background: white;
-          border-radius: 8px;
-          padding: 15px;
-        }
-
-        .system-item {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 10px;
-          border-bottom: 1px solid #eee;
-        }
-
-        .status-badge {
-          padding: 4px 12px;
-          border-radius: 15px;
-          font-size: 14px;
-          margin-left: auto;
-        }
-
-        .online {
-          background: #d4edda;
-          color: #155724;
-        }
-
-        .offline {
-          background: #f8d7da;
-          color: #721c24;
-        }
-
-        .file-tree {
-          background: #2b3a67;
-          color: white;
-          padding: 20px;
-          border-radius: 10px;
-          font-family: monospace;
-        }
-
-        .troubleshoot-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
-          margin-top: 20px;
-        }
-
-        .issue {
-          background: #f8f9fa;
-          padding: 20px;
-          border-radius: 10px;
-        }
-
-        .issue h3 {
-          color: #2b3a67;
-          margin-bottom: 10px;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-
-        code {
-          background: #f8f9fa;
-          padding: 2px 6px;
-          border-radius: 4px;
-          font-family: monospace;
-        }
-
-        @media (prefers-color-scheme: dark) {
-          .container {
-            background: #1a1a1a;
-          }
-          .card {
-            background: #2d2d2d;
-            color: #e9ecef;
-          }
-          .feature, .interface-preview, .step, .issue {
-            background: #363636;
-            color: #e9ecef;
-          }
-          .mock-header, .mock-content {
-            background: #2d2d2d;
-          }
-          .card h2 {
-            color: #87ceeb;
-          }
-          code {
-            background: #363636;
-            color: #e9ecef;
-          }
-        }
-
-        @media (prefers-reduced-motion) {
-          .header {
-            animation: none;
-          }
-        }
-      </style>
-
-      <div class="container">
-        <!-- Header -->
-        <div class="header">
-          <h1>RDP Dashboard</h1>
-          <p>A simple and efficient remote desktop management system</p>
-        </div>
-
-        <!-- Quick Start -->
-        <div class="card">
-          <h2>🚀 Quick Start</h2>
-          <div class="steps">
-            <div class="step">
-              <div class="step-number">1</div>
-              <strong>Run</strong>
-              <p>Double click <code>run.bat</code></p>
-            </div>
-            <div class="step">
-              <div class="step-number">2</div>
-              <strong>Wait</strong>
-              <p>Python check & installation</p>
-            </div>
-            <div class="step">
-              <div class="step-number">3</div>
-              <strong>Access</strong>
-              <p>Open <code>localhost:5000</code></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Features -->
-        <div class="card">
-          <h2>✨ Features</h2>
-          <div class="features-grid">
-            <div class="feature">
-              <div class="feature-icon">⚡</div>
-              <div>
-                <h3>Remote Desktop</h3>
-                <p>Quick RDP connections to your systems</p>
-              </div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">📡</div>
-              <div>
-                <h3>Real-time Monitor</h3>
-                <p>Live system status updates</p>
-              </div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">🔌</div>
-              <div>
-                <h3>Wake-on-LAN</h3>
-                <p>Remote power management</p>
-              </div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">📄</div>
-              <div>
-                <h3>PDF Viewer</h3>
-                <p>Built-in documentation viewer</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Interface -->
-        <div class="card">
-          <h2>💻 Interface</h2>
-          <div class="interface-preview">
-            <div class="mock-header">
-              <h3>RDP Dashboard</h3>
-              <span>Status Machine</span>
-            </div>
-            <div class="mock-content">
-              <div class="system-item">
-                <span>▼</span>
-                <span>Hypervisor 1</span>
-                <span class="status-badge online">Online</span>
-              </div>
-              <div class="system-item" style="margin-left: 20px;">
-                <span>VM 1 (192.168.1.101)</span>
-                <span class="status-badge online">Online</span>
-              </div>
-              <div class="system-item" style="margin-left: 20px;">
-                <span>VM 2 (192.168.1.102)</span>
-                <span class="status-badge offline">Offline</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- File Structure -->
-        <div class="card">
-          <h2>📁 File Structure</h2>
-          <div class="file-tree">
-            <pre>
-root/
- ├── run.bat       👈 Start here!
- ├── app.py        
- ├── rdp.py       
- ├── pdf.py       
- └── requirements.txt</pre>
-          </div>
-        </div>
-
-        <!-- Troubleshooting -->
-        <div class="card">
-          <h2>🔧 Troubleshooting</h2>
-          <div class="troubleshoot-grid">
-            <div class="issue">
-              <h3>🐍 Python Issues</h3>
-              <ul>
-                <li>Check Python installation</li>
-                <li>Verify PATH settings</li>
-                <li>Run as administrator</li>
-              </ul>
-            </div>
-            <div class="issue">
-              <h3>🌐 Network Issues</h3>
-              <ul>
-                <li>Check connectivity</li>
-                <li>Verify IP addresses</li>
-                <li>Test RDP access</li>
-              </ul>
-            </div>
-            <div class="issue">
-              <h3>⚡ WoL Problems</h3>
-              <ul>
-                <li>Verify MAC address</li>
-                <li>Check BIOS settings</li>
-                <li>Test network broadcast</li>
-              </ul>
-            </div>
-            <div class="issue">
-              <h3>💻 RDP Errors</h3>
-              <ul>
-                <li>Check system online</li>
-                <li>Verify permissions</li>
-                <li>Test credentials</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </foreignObject>
+  <!-- Troubleshooting Card -->
+  <rect x="40" y="1070" width="1120" height="250" rx="15" fill="white" filter="url(#shadow)"/>
+  <text x="60" y="1100" font-size="24" fill="#2b3a67" font-family="sans-serif">
+    🔧 Troubleshooting
+  </text>
+  
+  <!-- Python Issues (Top Left) -->
+  <g transform="translate(60,1120)">
+    <text x="0" y="0" font-size="18" fill="#2b3a67" font-family="sans-serif">
+      🐍 Python Issues
+    </text>
+    <text x="0" y="20" font-size="14" fill="black" font-family="sans-serif">
+      • Check Python installation
+    </text>
+    <text x="0" y="40" font-size="14" fill="black" font-family="sans-serif">
+      • Verify PATH settings
+    </text>
+    <text x="0" y="60" font-size="14" fill="black" font-family="sans-serif">
+      • Run as administrator
+    </text>
+  </g>
+  <!-- Network Issues (Top Right) -->
+  <g transform="translate(600,1120)">
+    <text x="0" y="0" font-size="18" fill="#2b3a67" font-family="sans-serif">
+      🌐 Network Issues
+    </text>
+    <text x="0" y="20" font-size="14" fill="black" font-family="sans-serif">
+      • Check connectivity
+    </text>
+    <text x="0" y="40" font-size="14" fill="black" font-family="sans-serif">
+      • Verify IP addresses
+    </text>
+    <text x="0" y="60" font-size="14" fill="black" font-family="sans-serif">
+      • Test RDP access
+    </text>
+  </g>
+  <!-- WoL Problems (Bottom Left) -->
+  <g transform="translate(60,1200)">
+    <text x="0" y="0" font-size="18" fill="#2b3a67" font-family="sans-serif">
+      ⚡ WoL Problems
+    </text>
+    <text x="0" y="20" font-size="14" fill="black" font-family="sans-serif">
+      • Verify MAC address
+    </text>
+    <text x="0" y="40" font-size="14" fill="black" font-family="sans-serif">
+      • Check BIOS settings
+    </text>
+    <text x="0" y="60" font-size="14" fill="black" font-family="sans-serif">
+      • Test network broadcast
+    </text>
+  </g>
+  <!-- RDP Errors (Bottom Right) -->
+  <g transform="translate(600,1200)">
+    <text x="0" y="0" font-size="18" fill="#2b3a67" font-family="sans-serif">
+      💻 RDP Errors
+    </text>
+    <text x="0" y="20" font-size="14" fill="black" font-family="sans-serif">
+      • Check system online
+    </text>
+    <text x="0" y="40" font-size="14" fill="black" font-family="sans-serif">
+      • Verify permissions
+    </text>
+    <text x="0" y="60" font-size="14" fill="black" font-family="sans-serif">
+      • Test credentials
+    </text>
+  </g>
 </svg>
