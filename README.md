@@ -25,7 +25,7 @@ graph TD
     A[Double click run.bat] --> B[Python check]
     B --> C[Install dependencies]
     C --> D[Start application]
-    D --> E[http://localhost:5000]
+    D --> E["localhost:5000"]
 ```
 
 ## 🎯 Dashboard Interface
