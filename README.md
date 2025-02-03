@@ -166,6 +166,5 @@ Check the console output when running `run.bat` for detailed error messages and 
 
 <div align="center">
 
-For more information, see the [Documentation](#documentation) section
 
 </div>
