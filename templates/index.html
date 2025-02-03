@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>RDP Dashboard</title>
+  <style>
+    /* Basale reset & layout */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    body {
+      background: #fff;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background: #f7f7f7;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo {
+      height: 80px;
+      width: auto;
+    }
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .status-text {
+      font-size: 16px;
+      color: #666;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ddd;
+    }
+    .tab-button {
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 16px;
+      color: #555;
+    }
+    .tab-button.active {
+      border-bottom: 3px solid #007bff;
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    /* Tab content containers */
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Gemeenschappelijke “box” styles (borders, etc.) */
+    .box {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    /* Search container */
+    .search-container {
+      padding: 10px 0;
+      background: #fafafa;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+    .search-container input {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    /* Dashboard tab styling */
+    .systems-list {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .system-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .system-item:last-child {
+      border-bottom: none;
+    }
+    .collapse-button {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #666;
+      margin-right: 8px;
+      transition: transform 0.2s;
+    }
+    .collapse-button.collapsed {
+      transform: rotate(-90deg);
+    }
+    .system-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 16px;
+      color: #666;
+    }
+    .vm-container {
+      margin-left: 48px;
+      border-left: 2px solid #f3f4f6;
+      display: block; /* we togglen deze op 'none' bij collapse */
+    }
+    .system-info {
+      flex: 1;
+    }
+    .system-name {
+      font-weight: 500;
+    }
+    .system-ip {
+      font-size: 14px;
+      color: #666;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+    .status-badge.online {
+      background: #ecfdf5;
+      color: #047857;
+    }
+    .status-badge.offline {
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    .status-dot.online {
+      background: #10b981;
+    }
+    .status-dot.offline {
+      background: #ef4444;
+    }
+
+    /* info-bar */
+    .info-bar {
+      margin-top: 16px;
+      padding: 16px;
+      background: #eff6ff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      color: #1e40af;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      gap: 8px;
+    }
+
+    /* contextmenu */
+    .context-menu {
+      position: fixed;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      padding: 4px 0;
+      z-index: 9999;
+    }
+    .context-menu-item {
+      padding: 8px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .context-menu-item:hover {
+      background: #f3f4f6;
+    }
+    .context-menu-item.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* PDF tab styling */
+    .pdf-container {
+      display: flex;
+      gap: 20px;
+      height: 700px; /* Pas dit naar wens aan */
+    }
+    .pdf-list {
+      width: 30%;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+    .pdf-list ul {
+      list-style: none;
+      padding-left: 20px;
+    }
+    .pdf-list li {
+      padding: 6px;
+      cursor: pointer;
+    }
+    .pdf-list li:hover {
+      background: #f9f9f9;
+    }
+.folder-toggle {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  margin-right: 8px;
+  transition: transform 0.2s;
+}
+.folder-toggle.collapsed {
+  transform: rotate(-90deg);
+}
+    .folder-children {
+      display: none; /* standaard ingeklapt */
+      margin-left: 15px;
+    }
+    .pdf-viewer {
+      flex-grow: 1;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+      position: relative;
+    }
+    .pdf-viewer iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: contain;
+    }
+
+    </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-title">
+        <img src="/static/ProsPact-Logo.png" alt="Prospect Logo" class="logo">
+        <h1 class="title">RDP Dashboard</h1>
+      </div>
+      <div class="status-text">Status Machine</div>
+    </div>
+
+    <!-- Tab Navigatie -->
+    <div class="tabs">
+      <button class="tab-button active" data-tab="dashboard-tab">Dashboard</button>
+      <button class="tab-button" data-tab="pdf-tab">PDF Instructies</button>
+    </div>
+
+    <!-- Dashboard Tab -->
+    <div id="dashboard-tab" class="tab-content active">
+      <div class="search-container">
+        <input type="text" id="dashboard-search" placeholder="Search systems...">
+      </div>
+      <div id="systems-list" class="systems-list">
+        <div class="loading">Loading...</div>
+      </div>
+      <div class="info-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        Right-click any system for actions: Ping, RDP, WOL, or Shutdown
+      </div>
+    </div>
+
+    <!-- RDP Tab -->
+    <div id="rdp-tab" class="tab-content">
+      <!-- Voorbeeld: je zou hier bijv. een lijst van IP’s kunnen tonen, 
+           of een zoekveld voor RDP-gebruik, etc. -->
+      <div class="box">
+        <h2>RDP Connection List (Example)</h2>
+        <p>Hier kun je bijvoorbeeld al je RDP-connecties tonen, 
+           of een zoekfunctie voor IP’s maken, etc.</p>
+        <div id="rdp-list" class="rdp-list">
+          <div class="rdp-list-item" data-ip="192.168.1.10">Server 1 (192.168.1.10)</div>
+          <div class="rdp-list-item" data-ip="192.168.1.20">Server 2 (192.168.1.20)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PDF Tab -->
+    <div id="pdf-tab" class="tab-content">
+      <div class="search-container">
+        <input type="text" id="pdf-search" placeholder="Search PDFs...">
+      </div>
+      <div class="pdf-container">
+        <div class="pdf-list" id="pdf-list">
+          <div class="loading">Loading PDF tree...</div>
+        </div>
+        <div class="pdf-viewer" id="pdf-viewer">
+          <div class="loading">Select a PDF to view</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /***** Tab Switching Logic *****/
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-tab');
+        // Activeer de juiste tab
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById(targetTab).classList.add('active');
+
+        // Als we naar de PDF-tab gaan, laad dan de PDF-boomstructuur
+        if (targetTab === 'pdf-tab') {
+          loadPdfTree();
+        }
+      });
+    });
+
+    /***** Dashboard (Systemen) *****/
+    let statuses = {};
+
+    function updateSystemsList(hypervisors) {
+      const container = document.getElementById('systems-list');
+      let html = '';
+      hypervisors.forEach(hv => {
+        const hasVMs = hv.vms && hv.vms.length > 0;
+        const chevronSvg = hasVMs ? `
+          <svg class="collapse-button" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        ` : '';
+        const serverSvg = `
+          <svg class="system-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+          </svg>
+        `;
+        html += `
+          <div class="system-group" data-id="${hv.id}">
+            <div class="system-item hypervisor" data-id="${hv.id}" data-type="hypervisor" data-ip="${hv.ip}" data-mac="${hv.mac || ''}">
+              ${chevronSvg}
+              ${serverSvg}
+              <div class="system-info">
+                <div class="system-name">${hv.name}</div>
+                <div class="system-ip">${hv.ip}</div>
+              </div>
+              <div class="status-badge offline">
+                <span class="status-dot offline"></span>
+                Offline
+              </div>
+            </div>
+        `;
+        if (hasVMs) {
+          html += `<div class="vm-container">`;
+          hv.vms.forEach(vm => {
+            const monitorSvg = `
+              <svg class="system-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            `;
+            html += `
+              <div class="system-item vm" data-id="${vm.id}" data-type="vm" data-ip="${vm.ip}" data-mac="${vm.mac || ''}">
+                ${monitorSvg}
+                <div class="system-info">
+                  <div class="system-name">${vm.name}</div>
+                  <div class="system-ip">${vm.ip}</div>
+                </div>
+                <div class="status-badge offline">
+                  <span class="status-dot offline"></span>
+                  Offline
+                </div>
+              </div>
+            `;
+          });
+          html += `</div>`;
+        }
+        html += `</div>`;
+      });
+      container.innerHTML = html;
+
+      // Collapse/expand
+      document.querySelectorAll('.collapse-button').forEach(button => {
+        button.addEventListener('click', e => {
+          e.stopPropagation();
+          const group = button.closest('.system-group');
+          const vmContainer = group.querySelector('.vm-container');
+          button.classList.toggle('collapsed');
+          vmContainer.style.display = vmContainer.style.display === 'none' ? 'block' : 'none';
+        });
+      });
+
+      // Rechtermuisknop
+      document.querySelectorAll('.system-item').forEach(item => {
+        item.addEventListener('contextmenu', handleContextMenu);
+      });
+    }
+
+    function updateStatuses() {
+      fetch('/api/status')
+        .then(response => response.json())
+        .then(newStatuses => {
+          statuses = newStatuses;
+          document.querySelectorAll('.system-item').forEach(item => {
+            const id = item.dataset.id;
+            const online = statuses[id];
+            const badge = item.querySelector('.status-badge');
+            const dot = item.querySelector('.status-dot');
+            const label = online ? 'Online' : 'Offline';
+            badge.className = `status-badge ${online ? 'online' : 'offline'}`;
+            dot.className = `status-dot ${online ? 'online' : 'offline'}`;
+            badge.lastChild.textContent = label;
+          });
+        })
+        .catch(err => console.error('Error updating statuses:', err));
+    }
+
+    // Systeem-lijst doorzoeken
+    document.getElementById('dashboard-search').addEventListener('input', function() {
+      const query = this.value.trim().toLowerCase();
+      document.querySelectorAll('.system-group').forEach(group => {
+        const text = group.textContent.toLowerCase();
+        group.style.display = text.includes(query) ? '' : 'none';
+      });
+    });
+
+    function handleContextMenu(e) {
+      e.preventDefault();
+      const item = e.currentTarget;
+      const id = item.dataset.id;
+      const ip = item.dataset.ip;
+      const mac = item.dataset.mac;
+      const name = item.querySelector('.system-name').textContent;
+      const isOnline = statuses[id];
+      showContextMenu(e.pageX, e.pageY, { ip, mac, name, isOnline });
+    }
+
+    function showContextMenu(x, y, system) {
+      const existing = document.querySelector('.context-menu');
+      if (existing) existing.remove();
+
+      const menu = document.createElement('div');
+      menu.className = 'context-menu';
+      menu.style.left = x + 'px';
+      menu.style.top = y + 'px';
+
+      const items = [
+        {
+          text: 'Ping',
+          action: () => ping(system.ip),
+          disabled: false
+        },
+        {
+          text: 'Connect via RDP',
+          action: () => rdp(system.ip),
+          disabled: !system.isOnline
+        },
+        {
+          text: 'Wake On LAN',
+          action: () => wol(system.mac),
+          disabled: !system.mac || system.isOnline
+        },
+        {
+          text: 'Shutdown',
+          action: () => shutdown(system.ip, system.name),
+          disabled: !system.isOnline
+        }
+      ];
+
+      items.forEach(i => {
+        const div = document.createElement('div');
+        div.className = 'context-menu-item' + (i.disabled ? ' disabled' : '');
+        div.textContent = i.text;
+        if(!i.disabled) {
+          div.onclick = () => { i.action(); menu.remove(); };
+        }
+        menu.appendChild(div);
+      });
+
+      document.body.appendChild(menu);
+
+      // Klik buiten menu -> sluit menu
+      setTimeout(() => {
+        document.addEventListener('click', function closeMenu() {
+          menu.remove();
+          document.removeEventListener('click', closeMenu);
+        });
+      }, 0);
+    }
+
+    async function ping(ip) {
+      try {
+        const resp = await fetch(`/api/ping?ip=${ip}`);
+        const data = await resp.json();
+        alert(`Status: ${data.status}`);
+        updateStatuses();
+      } catch (error) {
+        alert('Ping failed');
+      }
+    }
+    function rdp(ip) {
+      window.location = `/rdp?ip=${ip}`;
+    }
+    async function wol(mac) {
+      try {
+        const resp = await fetch(`/wol?mac=${mac}`);
+        const text = await resp.text();
+        alert(text);
+        setTimeout(updateStatuses, 1000);
+      } catch (error) {
+        alert('WOL failed');
+      }
+    }
+    async function shutdown(ip, name) {
+      if(confirm(`Are you sure you want to shut down ${name}?`)){
+        try {
+          const resp = await fetch(`/shutdown?ip=${ip}`);
+          const text = await resp.text();
+          alert(text);
+          setTimeout(updateStatuses, 1000);
+        } catch (error) {
+          alert('Shutdown failed');
+        }
+      }
+    }
+
+    // Init Dashboard
+    fetch('/api/config')
+      .then(resp => resp.json())
+      .then(cfg => {
+        if(!cfg.hypervisors) throw new Error('No hypervisors found');
+        updateSystemsList(cfg.hypervisors);
+        updateStatuses();
+        setInterval(updateStatuses, 30000);
+      })
+      .catch(err => {
+        document.getElementById('systems-list').innerHTML = `<div class="error">Failed to load systems: ${err.message}</div>`;
+      });
+
+    /***** RDP Tab (optioneel) *****/
+    // Voorbeeld: Klik op item -> download RDP
+    const rdpList = document.getElementById('rdp-list');
+    if(rdpList){
+      rdpList.addEventListener('click', e => {
+        const item = e.target.closest('.rdp-list-item');
+        if(!item) return;
+        const ip = item.dataset.ip;
+        if(ip) {
+          window.location = `/rdp?ip=${ip}`;
+        }
+      });
+    }
+
+    /***** PDF Tab *****/
+    let pdfTreeData = [];
+
+    function loadPdfTree() {
+      fetch('/api/pdfs_list')
+        .then(resp => resp.json())
+        .then(tree => {
+          pdfTreeData = tree;
+          renderPdfTreeToDom(tree);
+        })
+        .catch(err => {
+          document.getElementById('pdf-list').innerHTML = `<div class="error">Error loading PDF tree</div>`;
+        });
+    }
+
+function renderPdfTreeToDom(tree) {
+  const container = document.getElementById('pdf-list');
+  container.innerHTML = renderPdfTree(tree);
+
+  // Toggle folders
+  container.querySelectorAll('.folder-toggle').forEach(button => {
+    button.addEventListener('click', e => {
+      e.stopPropagation();
+      const group = button.closest('li');
+      const children = group.querySelector('.folder-children');
+      button.classList.toggle('collapsed');
+      children.style.display = children.style.display === 'none' ? 'block' : 'none';
+    });
+  });
+
+
+  // Click op file
+  container.querySelectorAll('.file-item').forEach(f => {
+    f.addEventListener('click', () => {
+      const path = f.getAttribute('data-path');
+      loadPdf(path);
+    });
+  });
+}
+function renderPdfTree(tree) {
+  let html = '<ul>';
+  tree.forEach(item => {
+    if(item.type === 'folder'){
+      const chevronSvg = `
+        <svg class="folder-toggle" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>`;
+      html += `<li>
+        ${chevronSvg}
+        <strong>${item.name}</strong>
+        <ul class="folder-children">
+          ${renderPdfTree(item.children || [])}
+        </ul>
+      </li>`;
+    } else {
+      html += `<li class="file-item" data-path="${item.path}">
+        ${item.name}
+      </li>`;
+    }
+  });
+  html += '</ul>';
+  return html;
+}
+
+    document.getElementById('pdf-search').addEventListener('input', function(){
+      const query = this.value.toLowerCase();
+      if(!pdfTreeData || !Array.isArray(pdfTreeData)) return;
+
+      if(query === ''){
+        renderPdfTreeToDom(pdfTreeData);
+        return;
+      }
+      // Eenvoudige substring-zoekopdracht in bestandsnamen
+      const results = [];
+      function searchFiles(tree){
+        tree.forEach(item => {
+          if(item.type === 'folder' && item.children){
+            searchFiles(item.children);
+          } else if(item.type === 'file'){
+            if(item.name.toLowerCase().includes(query)){
+              results.push(item);
+            }
+          }
+        });
+      }
+      searchFiles(pdfTreeData);
+
+      let html = '<ul>';
+      results.forEach(r => {
+        html += `<li class="file-item" data-path="${r.path}">
+          ${r.name}
+        </li>`;
+      });
+      html += '</ul>';
+      document.getElementById('pdf-list').innerHTML = html;
+      document.querySelectorAll('.file-item').forEach(f => {
+        f.addEventListener('click', () => {
+          const path = f.getAttribute('data-path');
+          loadPdf(path);
+        });
+      });
+    });
+
+function loadPdf(file) {
+    // Replace backslashes and encode the path properly
+    file = file.replace(/\\/g, '/');
+    const encodedPath = file.split('/').map(part => encodeURIComponent(part)).join('/');
+    
+    console.log("Encoded path:", encodedPath); // Debug logging
+    
+    const viewer = document.getElementById('pdf-viewer');
+    const iframeSrc = `/pdf_file/${encodedPath}`;
+    
+    viewer.innerHTML = `
+        <iframe src="${iframeSrc}#zoom=page-fit" allowfullscreen></iframe>
+        <div style="margin-top: 10px; text-align:right;">
+            <a href="${iframeSrc}" download>Download PDF</a>
+        </div>`;
+}
+
+  </script>
+</body>
+</html>
