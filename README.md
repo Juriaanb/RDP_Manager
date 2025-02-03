@@ -28,10 +28,10 @@ That's it! Just run `run.bat` and the application will start automatically.
 ```
 ┌──────────────────────────────────┐
 │ ⚡ Remote Desktop Management     │
-│ 📡 Real-time System Monitoring  │
-│ 🔌 Wake-on-LAN Support         │
-│ 📄 PDF Document Viewer         │
-│ 🔄 Auto-config Reload          │
+│ 📡 Real-time System Monitoring   │
+│ 🔌 Wake-on-LAN Support           │
+│ 📄 PDF Document Viewer           │
+│ 🔄 Auto-config Reload            │
 └──────────────────────────────────┘
 ```
 
@@ -46,15 +46,15 @@ That's it! Just run `run.bat` and the application will start automatically.
 ## Understanding the Dashboard 🎯
 
 ```
-┌─ Dashboard ────────────────────┐
+┌─ Dashboard ───────────────────┐
 │                               │
 │  Hypervisors                  │
-│  ├─ System Status            │
-│  ├─ IP Address              │
-│  └─ Virtual Machines        │
-│     ├─ Status              │
-│     ├─ RDP Access         │
-│     └─ Power Control      │
+│  ├─ System Status             │
+│  ├─ IP Address                │
+│  └─ Virtual Machines          │
+│     ├─ Status                 │
+│     ├─ RDP Access             │
+│     └─ Power Control          │
 │                               │
 └───────────────────────────────┘
 ```
