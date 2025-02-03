@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDP Dashboard - Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            color: #1a1a1a;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #2b2d42;
+            margin-bottom: 10px;
+        }
+
+        .quick-start {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+
+        .feature-card h3 {
+            color: #2b2d42;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .steps {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .steps h2 {
+            color: #2b2d42;
+            margin-bottom: 15px;
+        }
+
+        .step {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: #4CAF50;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .notes {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+        }
+
+        .troubleshooting {
+            background: #f8d7da;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #dc3545;
+        }
+
+        code {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .file-structure {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+
+        .interface-preview {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+
+        .interface-preview img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>RDP Dashboard</h1>
+            <p>A simple and efficient remote desktop management system</p>
+        </div>
+
+        <div class="quick-start">
+            <h2>🚀 Quick Start</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>Double click <code>run.bat</code></div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>Wait for Python check and dependency installation</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>Access dashboard at <code>http://localhost:5000</code></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>⚡ Remote Desktop</h3>
+                <p>Quick RDP connections to your systems</p>
+            </div>
+            <div class="feature-card">
+                <h3>📡 Real-time Monitoring</h3>
+                <p>Live system status updates</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔌 Wake-on-LAN</h3>
+                <p>Remote power management</p>
+            </div>
+            <div class="feature-card">
+                <h3>📄 PDF Viewer</h3>
+                <p>Built-in documentation viewer</p>
+            </div>
+        </div>
+
+        <div class="interface-preview">
+            <h2>Dashboard Interface</h2>
+            <div style="background:#f5f5f5; padding:20px; border-radius:8px; margin-top:15px;">
+                <div style="background:white; padding:15px; border-radius:8px; border:1px solid #ddd;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:15px;">
+                        <div style="display:flex; align-items:center; gap:15px;">
+                            <div style="width:80px; height:40px; background:#eee; border-radius:4px;"></div>
+                            <h3 style="margin:0;">RDP Dashboard</h3>
+                        </div>
+                        <div>Status Machine</div>
+                    </div>
+                    <div style="display:flex; gap:15px; margin-bottom:15px;">
+                        <button style="padding:8px 16px; background:#007bff; color:white; border:none; border-radius:4px;">Dashboard</button>
+                        <button style="padding:8px 16px; background:#f8f9fa; border:1px solid #ddd; border-radius:4px;">PDF Instructions</button>
+                    </div>
+                    <div style="margin-bottom:15px;">
+                        <input type="text" placeholder="Search systems..." style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+                    </div>
+                    <div style="border:1px solid #ddd; border-radius:4px; padding:15px;">
+                        <div style="margin-bottom:10px;">
+                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:5px;">
+                                <span>▼</span>
+                                <span>Hypervisor 1</span>
+                                <span style="margin-left:auto; background:#e8f5e9; color:#2e7d32; padding:2px 8px; border-radius:12px; font-size:14px;">Online</span>
+                            </div>
+                            <div style="margin-left:25px;">
+                                <div style="display:flex; align-items:center; gap:10px; margin-bottom:5px;">
+                                    <span>VM 1 (192.168.1.101)</span>
+                                    <span style="margin-left:auto; background:#e8f5e9; color:#2e7d32; padding:2px 8px; border-radius:12px; font-size:14px;">Online</span>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:10px;">
+                                    <span>VM 2 (192.168.1.102)</span>
+                                    <span style="margin-left:auto; background:#ffebee; color:#c62828; padding:2px 8px; border-radius:12px; font-size:14px;">Offline</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:15px; background:#e3f2fd; padding:10px; border-radius:4px; font-size:14px;">
+                        ℹ️ Right-click any system for actions: Ping, RDP, WOL, or Shutdown
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="file-structure">
+            <h2>📁 File Structure</h2>
+            <pre>
+root/
+ ├── run.bat       <- 👉 This is all you need to run!
+ ├── app.py        
+ ├── rdp.py       
+ ├── pdf.py       
+ └── requirements.txt
+            </pre>
+        </div>
+
+        <div class="notes">
+            <h2>📌 Notes</h2>
+            <ul style="list-style-type:none; margin-left:20px;">
+                <li>• Default port is 5000</li>
+                <li>• Automatically monitors system status every 30 seconds</li>
+                <li>• Supports Wake-on-LAN for remote power on</li>
+                <li>• Remote shutdown capability for managed systems</li>
+            </ul>
+        </div>
+
+        <div class="troubleshooting">
+            <h2>🔧 Having Issues?</h2>
+            <ol style="margin-left:20px;">
+                <li>Make sure Python is installed</li>
+                <li>Check network connectivity</li>
+                <li>Verify system IP addresses</li>
+                <li>Ensure target systems support RDP</li>
+            </ol>
+            <p style="margin-top:10px;">
+                For more detailed troubleshooting, check the console output when running <code>run.bat</code>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
